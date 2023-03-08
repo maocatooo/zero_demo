@@ -1,0 +1,20 @@
+type Request {
+	Name string `path:"name,options=you|me"`
+}
+
+type Response {
+	Message string `json:"message"`
+}
+type Response1 {
+	Message string `json:"message"`
+}
+
+service api_user-api {
+	@handler Api_userHandler
+	get /from/:name(Request) returns (Response)
+	
+	@server(
+		handler: ExpandHandler
+	)
+	get /expand(Request) returns(Response)
+}
